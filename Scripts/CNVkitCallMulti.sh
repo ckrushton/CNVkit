@@ -8,7 +8,7 @@
 echo ""
 if [[ $# -eq 0 ]]
 then
-	echo "Usage: RunCallMulti.sh [options] [file1 [file2... ]]"
+	echo "Usage: CNVkitCallMulti.sh [options] [file1 [file2... ]]"
 	echo "Runs cnvkit.py call on multiple .cns files with different purity values"
 	echo "Ensure coresponding files share the same base name"
 	echo ""
@@ -184,19 +184,19 @@ outputLogFile="${outputPath}LogFile.txt"
 cnvkitVersion=$(cnvkit.py version)
 touch $outputLogFile
 
-echo "RunCallMulti.sh: Script Started at $startTime" > $outputLogFile
+echo "CNVkitCallMulti.sh: Script started at $startTime" > $outputLogFile
 echo "" >> $outputLogFile
 echo "===========================================================" >> $outputLogFile
 echo "" >> $outputLogFile
-echo "The following options were specified:" >> $outputLogFile
+echo "The following parameters were used:" >> $outputLogFile
 echo "		Output Path: $outputPath" >> $outputLogFile
 echo "		Purity File: $samplePurityFile" >> $outputLogFile
 echo "		Filtering Method: $filterType" >> $outputLogFile
 echo "		Centering Type: $centerType" >> $outputLogFile
 echo "		Scatter: $scatter" >> $outputLogFile
-echo "		Diagram: $scatter" >> $outputLogFile
+echo "		Diagram: $diagram" >> $outputLogFile
 echo "" >> $outputLogFile
-echo "The following files were supplied:" >> $outputLogFile
+echo "The following files were used:" >> $outputLogFile
 echo "CNS files:" >> $outputLogFile
 for cnsFile in ${inputCNS[*]}
 do
@@ -215,6 +215,8 @@ do
 	echo "$cnsFile" >> $outputLogFile
 done
 echo "" >> $outputLogFile
+echo "" >> $outputLogFile
+echo "CNVkit Version: $cnvkitVersion" >> $outputLogFile
 echo "" >> $outputLogFile
 echo "CNVkit Call output:" >> $outputLogFile
 echo "===============================================================" >> $outputLogFile
