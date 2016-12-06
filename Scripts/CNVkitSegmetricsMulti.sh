@@ -115,7 +115,7 @@ for cnrFile in ${cnrFiles[*]}; do
 
 	segArgs="$cnrFile -s $cnsFile"
 
-	if [[ $ci == "true" ]] && [[$sem == "true" ]]; then
+	if [[ $ci == "true" ]] && [[ $sem == "true" ]]; then
 
 		# If specified, adds ci
 		if [[ $ci == "true" ]]; then
@@ -136,6 +136,6 @@ for cnrFile in ${cnrFiles[*]}; do
 
 	segArgs="$segArgs -o ${outputDir}${cnrBaseName}.segmetrics.cns"
 
-	cnvkit.py segmetrics $segArgs >> $outputLogFile
+	cnvkit.py segmetrics $segArgs &>> $outputLogFile
 
 done

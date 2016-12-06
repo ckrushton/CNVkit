@@ -218,7 +218,7 @@ echo "" >> $outputLogFile
 echo "" >> $outputLogFile
 echo "CNVkit Version: $cnvkitVersion" >> $outputLogFile
 echo "" >> $outputLogFile
-echo "CNVkit Call output:" >> $outputLogFile
+echo "CNVkit Call Standard Error Stream:" >> $outputLogFile
 echo "===============================================================" >> $outputLogFile
 
 
@@ -310,6 +310,8 @@ do
 			
 		done<$samplePurityFile
 
+
+	fi
 	# If sample purity was not found in the file, assume a purity of 100%
 	if [ $samplePurity != -1 ]
 	then
