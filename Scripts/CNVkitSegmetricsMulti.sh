@@ -115,7 +115,7 @@ for cnrFile in ${cnrFiles[*]}; do
 
 	segArgs="$cnrFile -s $cnsFile"
 
-	if [[ $ci == "true" ]] and [[$sem == "true" ]]; then
+	if [[ $ci == "true" ]] && [[$sem == "true" ]]; then
 
 		# If specified, adds ci
 		if [[ $ci == "true" ]]; then
