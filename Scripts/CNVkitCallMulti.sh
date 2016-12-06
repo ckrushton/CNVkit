@@ -221,7 +221,7 @@ echo "" >> $outputLogFile
 echo "CNVkit Call Standard Error Stream:" >> $outputLogFile
 echo "===============================================================" >> $outputLogFile
 
-
+source activate python2
 
 for cnsFile in ${inputCNS[*]}
 do
@@ -358,7 +358,7 @@ do
 
 		if [ $matchedCnr == "None" ]
 		then
-			echo "WARNING: No .cnr file was found for $cnsFile."
+			echo "WARNING: No .cnr file was found for $cnsFile"
 			echo "--scatter or --diagram may be incomplete"
 
 		else
@@ -383,3 +383,4 @@ do
 
 done
 
+source deactivate
