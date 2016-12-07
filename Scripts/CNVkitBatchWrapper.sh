@@ -60,10 +60,10 @@ done
 logFile="${outputDir}LogFile.txt"
 touch $logFile
 cnvkitVer=$(cnvkit.py version)
-echo "CNVkitBatchWrapper.sh: Run on $(date)" > $logFile
+echo "CNVkitBatchWrapper.sh: Started on $(date)" > $logFile
 echo "" >> $logFile
 echo "The following options were used:" >> $logFile
-echo "##########################################################" >> $logFile
+echo "========================================================================" >> $logFile
 echo "Tumor BAMs run: " >> $logFile
 
 for tFile in ${tumorFiles[*]}; do
@@ -89,11 +89,16 @@ echo "All other batch options were left at default" >> $logFile
 echo "" >> $logFile
 echo "Run on cnvkit version $cnvkitVer" >> $logFile
 echo "" >> $logFile
-echo "CNVkit output:" >> $logFile
-echo "##########################################################" >> $logFile
+echo "CNVkit Batch standard error stream:" >> $logFile
+echo "========================================================================" >> $logFile
 
-source activate python2
 batchCommands="${tumorFiles[*]} --drop-low-coverage -p $threadNum -f $referenceGenome -t $targetBed -g $accessFile -d $outputDir -n ${normalFiles[*]}"
 cnvkit.py batch $batchCommands &>> $logFile
 
-source deactivate
+# Finalizes the output log
+echo "" >> $logFile
+echo "========================================================================" >> $logFile
+echo "" >> $logFile
+echo "Batch Complete" >> $logFile
+echo "Results in $outputDir" >> $logFile
+echo "CNVkitBatchWrapper: Finished on $(date)" >> $logFile

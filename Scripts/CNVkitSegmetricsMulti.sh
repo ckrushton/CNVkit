@@ -55,7 +55,7 @@ cnvkitVersion=$(cnvkit.py version)
 outputLogFile="${outputDir}LogFile.txt"
 touch $outputLogFile
 
-echo "CNVkitSegmetricsMulti.sh: Script started at $startTime" > $outputLogFile
+echo "CNVkitSegmetricsMulti.sh: Started on $startTime" > $outputLogFile
 echo "" >> $outputLogFile
 echo "=================================================================" >> $outputLogFile
 echo "" >> $outputLogFile
@@ -80,7 +80,7 @@ echo "" >> $outputLogFile
 echo "" >> $outputLogFile
 echo "CNVkit version: $cnvkitVersion" >> $outputLogFile
 echo "" >> $outputLogFile
-echo "CNVkit Segmetrics Standard Error Stream:" >> $outputLogFile
+echo "CNVkit Segmetrics standard error stream:" >> $outputLogFile
 echo "==================================================================" >> $outputLogFile
 
 # Runs cnvkit.py segmetrics
@@ -139,3 +139,11 @@ for cnrFile in ${cnrFiles[*]}; do
 	cnvkit.py segmetrics $segArgs &>> $outputLogFile
 
 done
+
+# Finalizes the output log
+echo "" >> $outputLogFile
+echo "========================================================================" >> $outputLogFile
+echo "" >> $outputLogFile
+echo "Segmetrics Complete" >> $outputLogFile
+echo "Results in $outputDir" >> $outputLogFile
+echo "CNVkitSegmetricsMulti.sh: Finished on $(date)" >> $outputLogFile

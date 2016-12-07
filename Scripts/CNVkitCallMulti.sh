@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# REQUIRES PYTHON 2.7 FOR GRCh38-based DATA
-
 # THIS SCRIPT IS OLD
 # I AM AWARE THE SYNTAX AND FORMATTING IS BAD
 # But it works
@@ -12,9 +10,6 @@ then
 	echo "Usage: CNVkitCallMulti.sh [options] [file1 [file2... ]]"
 	echo "Runs cnvkit.py call on multiple .cns files with different purity values"
 	echo "Ensure coresponding files share the same base name"
-	echo ""
-	echo "Requires Python 2.7 EXACTLY (Not newer)"
-	echo "Python 3.x does not work with GRCh38-based data"
 	echo ""
 	echo "Required Positional Arguments"
 	echo "	<.cns file> 	A segments file, output of cnvkit.py segment"
@@ -188,7 +183,7 @@ outputLogFile="${outputPath}LogFile.txt"
 cnvkitVersion=$(cnvkit.py version)
 touch $outputLogFile
 
-echo "CNVkitCallMulti.sh: Script started at $startTime" > $outputLogFile
+echo "CNVkitCallMulti.sh: Started on $startTime" > $outputLogFile
 echo "" >> $outputLogFile
 echo "===========================================================" >> $outputLogFile
 echo "" >> $outputLogFile
@@ -222,13 +217,9 @@ echo "" >> $outputLogFile
 echo "" >> $outputLogFile
 echo "CNVkit Version: $cnvkitVersion" >> $outputLogFile
 echo "" >> $outputLogFile
-echo "CNVkit Call Standard Error Stream:" >> $outputLogFile
+echo "CNVkit Call standard error stream:" >> $outputLogFile
 echo "===============================================================" >> $outputLogFile
 
-
-# THIS IS REQUIRED FOR CRCh38-based DATA
-# Ensure python2 is installed
-source activate python2
 
 for cnsFile in ${inputCNS[*]}
 do
@@ -293,7 +284,7 @@ do
 		then
 			cnvkitCallCom+=" -v $matchedVCF"
 		else
-			echo "ERROR: No .vcf file was found for $cnsFile. Proceeding..."
+			echo "ERROR: No .vcf file was found for $cnsFile. Proceeding..." >> $outputLogFile
 
 		fi
 
@@ -365,8 +356,8 @@ do
 
 		if [ $matchedCnr == "None" ]
 		then
-			echo "WARNING: No .cnr file was found for $cnsFile"
-			echo "--scatter or --diagram may be incomplete"
+			echo "WARNING: No .cnr file was found for $cnsFile" >> $outputLogFile
+			echo "--scatter or --diagram may be incomplete" >> $outputLogFile
 
 		else
 			scatterCom="$matchedCnr $scatterCom"
@@ -390,4 +381,10 @@ do
 
 done
 
-source deactivate
+# Finalizes the output log
+echo "" >> $outputLogFile
+echo "========================================================================" >> $outputLogFile
+echo "" >> $outputLogFile
+echo "Call Complete" >> $outputLogFile
+echo "Results in $outputDir" >> $outputLogFile
+echo "CNVkitCallMulti: Finished on $(date)" >> $outputLogFile
