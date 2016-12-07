@@ -92,6 +92,8 @@ echo "" >> $logFile
 echo "CNVkit output:" >> $logFile
 echo "##########################################################" >> $logFile
 
-
+source activate python2
 batchCommands="${tumorFiles[*]} --drop-low-coverage -p $threadNum -f $referenceGenome -t $targetBed -g $accessFile -d $outputDir -n ${normalFiles[*]}"
 cnvkit.py batch $batchCommands &>> $logFile
+
+source deactivate

@@ -1,9 +1,10 @@
 #!/bin/bash
 
+# REQUIRES PYTHON 2.7 FOR GRCh38-based DATA
+
 # THIS SCRIPT IS OLD
 # I AM AWARE THE SYNTAX AND FORMATTING IS BAD
 # But it works
-
 
 echo ""
 if [[ $# -eq 0 ]]
@@ -11,6 +12,9 @@ then
 	echo "Usage: CNVkitCallMulti.sh [options] [file1 [file2... ]]"
 	echo "Runs cnvkit.py call on multiple .cns files with different purity values"
 	echo "Ensure coresponding files share the same base name"
+	echo ""
+	echo "Requires Python 2.7 EXACTLY (Not newer)"
+	echo "Python 3.x does not work with GRCh38-based data"
 	echo ""
 	echo "Required Positional Arguments"
 	echo "	<.cns file> 	A segments file, output of cnvkit.py segment"
@@ -221,6 +225,9 @@ echo "" >> $outputLogFile
 echo "CNVkit Call Standard Error Stream:" >> $outputLogFile
 echo "===============================================================" >> $outputLogFile
 
+
+# THIS IS REQUIRED FOR CRCh38-based DATA
+# Ensure python2 is installed
 source activate python2
 
 for cnsFile in ${inputCNS[*]}
